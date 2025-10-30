@@ -1,0 +1,10 @@
+{
+  "name": "QA Tester",
+  "email": "qa-testerr-1760315175546@test.com",
+  "subject": "Support",
+  "message": "Testing using fixtures and upload",
+  "body": "Fixtures are a great way to mock data for responses to routes",
+  "user": "qa-testerr-1760315175546@test.com",
+  "password": "12345"
+  
+}
