@@ -8,6 +8,7 @@ import register from '../modules/register'
 import contact from '../modules/contact'
 
 
+
 describe('Automation Exercise', () => {
     beforeEach(() => {
         cy.viewport('iphone-xr')
@@ -67,6 +68,31 @@ describe('Automation Exercise', () => {
 
         cy.get('.status').should('be.visible')
         cy.get('.status').should('have.text', 'Success! Your details have been submitted successfully.')
+
+    });
+
+    it('Verify All Products and product detail page', () => {
+
+        menu.navigateToProducts()
+        menu.verifyAllProductsPage()
+        menu.clickFirstProductsListVisible()
+
+        cy.get('.product-information > h2').should('be.visible')
+        cy.get('.product-information p').eq(0).should('contain.text', 'Category:')
+        cy.get('.product-information span span').should('contain.text', 'Rs.')
+        cy.get('.product-information p').eq(1).should('contain.text', 'Availability:')
+        cy.get('.product-information p').eq(2).should('contain.text', 'Condition:')
+        cy.get('.product-information p').eq(3).should('contain.text', 'Brand:')
+
+    });
+
+    it('Search for a Product', () => {
+        menu.navigateToProducts()
+        menu.verifyAllProductsPage()
+        //menu.clickFirstProductsListVisible()
+        menu.searchForProduct()
+
+        cy.get('.title').should('contain.text', 'Searched Products')
 
     });
 })
