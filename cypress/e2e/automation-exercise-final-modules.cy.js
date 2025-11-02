@@ -6,6 +6,7 @@ import menu from '../modules/menu'
 import login from '../modules/login'
 import register from '../modules/register'
 import contact from '../modules/contact'
+import cart from '../modules/cart'
 
 
 
@@ -89,10 +90,37 @@ describe('Automation Exercise', () => {
     it('Search for a Product', () => {
         menu.navigateToProducts()
         menu.verifyAllProductsPage()
-        //menu.clickFirstProductsListVisible()
         menu.searchForProduct()
 
         cy.get('.title').should('contain.text', 'Searched Products')
+
+    });
+
+    it.only('Verify Subscription in home page', () => {
+        register.subscription(userData.email)
+
+        cy.get('.alert-success').should('contain.text', 'You have been successfully subscribed!')
+    });
+
+    it.only('Place Order: Register before Checkout', () => {
+        login.completePreRegistrationForm()
+
+        register.completeRegistrationForm()
+
+        cy.url().should('include', 'account_created')
+        cy.contains('b', 'Account Created')
+
+        cy.get('[data-qa="continue-button"]').click()
+
+        cy.get('i.fa-user').parent().should('contain', userData.name)
+
+        cart.addProductsToTheCart()
+        cart.proceedToCheckout()
+        cart.enterPayment(userData.name)
+
+        cy.contains('.col-sm-9 > p', 'Congratulations! Your order has been confirmed!')
+        cy.get('.col-sm-9 > .btn-default').should('be.visible')
+
 
     });
 })

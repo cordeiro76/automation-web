@@ -24,6 +24,12 @@ class Register {
         // Act
         cy.get('[data-qa="create-account"]').click()
     }
+
+    subscription(email){
+
+        cy.get('input#susbscribe_email').type(email)
+        cy.get('[id="subscribe"]').click()
+    }
 }
 
 export default new Register()
