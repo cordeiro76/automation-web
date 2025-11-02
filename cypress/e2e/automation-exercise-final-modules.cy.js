@@ -96,13 +96,13 @@ describe('Automation Exercise', () => {
 
     });
 
-    it.only('Verify Subscription in home page', () => {
+    it('Verify Subscription in home page', () => {
         register.subscription(userData.email)
 
         cy.get('.alert-success').should('contain.text', 'You have been successfully subscribed!')
     });
 
-    it.only('Place Order: Register before Checkout', () => {
+    it('Place Order: Register before Checkout', () => {
         login.completePreRegistrationForm()
 
         register.completeRegistrationForm()
